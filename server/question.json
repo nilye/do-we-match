@@ -1,0 +1,36 @@
+{"category": "food", "subject": "我喜欢吃的Pizza", "choices":["玛格丽特(Margherita)", "辣香肠(Pepperoni)", "腌肉芝麻叶(Prosciutto)"], "shouldMatch":true}
+{"category": "lifestyle", "subject": "牵手的时候我喜欢伸", "choices":["左手", "右手"], "shouldMatch":false}
+{"category":"food", "subject":"我喜欢吃的轻食沙拉", "choices":["蔬菜沙拉(Vegetables)",  "金枪鱼沙拉(Tuna)", "鸡胸肉沙拉(Chicken)", "熏牛肉(Beef)"], "shouldMatch":true}
+{"category":"food", "subject":"我喜欢吃的洋快餐是", "choices":["肯德基KFC",  "金拱门McDonald's", "汉堡王Burger King"], "shouldMatch":true}
+{"category":"food", "subject":"我喜欢吃的本帮江浙菜是", "choices":["糖醋里脊", "红烧肉", "烟熏鱼"], "shouldMatch":true}
+{"category":"food", "subject":"我喜欢吃的川菜是", "choices":["小炒肉", "毛血旺", "小龙虾"], "shouldMatch":true}
+{"category":"food", "subject":"我喜欢吃的粤式美食是", "choices":["肠粉",  "叉烧", "砂煲粥"], "shouldMatch":true}
+{"category":"food", "subject":"我喜欢吃的汤底是", "choices":["养生白汤",  "鲜辣红汤", "百搭鸳鸯锅"], "shouldMatch":true}
+{"category":"food", "subject":"我喜欢点的辣度是", "choices":["不吃辣",  "中辣", "魔鬼辣"], "shouldMatch":true}
+{"category":"food", "subject":"火锅里我喜欢涮", "choices":["牛羊肉", "牛舌/黄喉/鸭肠", "猪脑","时令鲜蔬"], "shouldMatch":true}
+{"category":"food", "subject":"我喜欢的饮料通常是", "choices":["冷饮", "热饮"], "shouldMatch":true}
+{"category":"music", "subject":"我平常听__类型的音乐", "choices":["流行乐",  "古典乐", "爵士乐", "Hip-pop"], "shouldMatch":true}
+{"category":"music", "subject":"我希望朋友的音乐品味和我：", "choices":["品味相似", "不一样", "无所谓"], "shouldMatch":true}
+{"category":"music", "subject":"听到一首好听的歌，我会觉得：", "choices":["歌手的嗓音很有特点", "哎呦，歌词不错", "伴奏令人非常舒适"], "shouldMatch":true}
+{"category":"music", "subject":"我觉得音乐适合：", "choices":["一个人专注地听", "和朋友分享"], "shouldMatch":true}
+{"category":"music", "subject":"我希望朋友的音乐品味和你：", "choices":["品味相似", "不一样", "无所谓"], "shouldMatch":true}
+{"category":"entertainment", "subject":"去电影院看电影，有以下几种类型影片，我会选择看", "choices":["爆米花电影", "文艺电影", "社会题材影片"], "shouldMatch":true}
+{"category":"entertainment", "subject":"突然想去电影院看电影，我会", "choices":["一个人说走就走", "找个伴"], "shouldMatch":true}
+{"category":"entertainment", "subject":"在电影院，我最喜欢的观影位置", "choices":["前三排", "最佳观影区", "后三排"], "shouldMatch":true}
+{"category":"entertainment", "subject":"我很容易在__这个专区找到喜欢的电视剧", "choices":["国产剧", "日韩剧", "英美剧", "泰剧"], "shouldMatch":true}
+{"category":"entertainment", "subject":"我讨厌一部肥皂剧是因为", "choices":["颜值低", "剧情又长又臭", "bug太多"], "shouldMatch":true}
+{"category":"entertainment", "subject":"我看综艺是为了", "choices":["笑一笑，吐吐槽", "欣赏才艺", "烧脑", "感受生活的美好"], "shouldMatch":true}
+{"category":"entertainment", "subject":"以下__是我最喜欢的日漫", "choices":["海贼王", "银魂", "夏目友人帐", "天空之城", "不看日漫"], "shouldMatch":true}
+{"category":"brand", "subject":"我喜欢的手机品牌是", "choices":["苹果", "华为", "小米", "锤子"], "shouldMatch":true}
+{"category":"brand", "subject":"我最爱的运动鞋品牌", "choices":["Adidas", "Nike", "Anta"], "shouldMatch":true}
+{"category":"brand", "subject":"我喜欢的手机品牌", "choices":["苹果", "华为", "小米"], "shouldMatch":true}
+{"category":"brand", "subject":"我喜欢穿的服装品牌通常是", "choices":["大众品牌", "潮牌", "轻奢", "高街"], "shouldMatch":true}
+{"category":"lifestyle", "subject":"我早上起床", "choices":["先刷牙", "先吃早饭"], "shouldMatch":true}
+{"category":"lifestyle", "subject":"我在冬天", "choices":["穿秋裤", "不穿秋裤"], "shouldMatch":true}
+{"category":"lifestyle", "subject":"我喜欢(animal)", "choices":["撸猫", "撸狗"], "shouldMatch":true}
+{"category":"lifestyle", "subject":"出国旅游，我最喜欢的环节", "choices":["日本", "马尔代夫", "巴塞罗那"], "shouldMatch":true}
+{"category":"lifestyle", "subject":"我睡觉习惯", "choices":["朝左", "朝右"], "shouldMatch":false}
+{"category":"lifestyle", "subject":"我平时喝", "choices":["冷水", "热水"], "shouldMatch":true}
+{"category":"lifestyle", "subject":"我平时喜欢", "choices":["茶", "咖啡", "果汁"], "shouldMatch":true}
+{"category":"lifestyle", "subject":"坐飞机大巴，喜欢坐在", "choices":["过道", "靠窗"], "shouldMatch":false}
+{"category":"lifestyle", "subject":"我通常的娱乐活动是", "choices":["唱歌", "玩游戏", "看书"], "shouldMatch":true}

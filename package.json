@@ -1,0 +1,31 @@
+{
+  "name": "do-we-match",
+  "version": "1.0.0",
+  "description": "My prime Nuxt.js project",
+  "author": "Nil",
+  "private": true,
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development nodemon server/web.js --watch",
+    "build": "nuxt build",
+    "start": "cross-env NODE_ENV=production node server/web.js",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@nuxtjs/axios": "^5.0.0",
+    "express": "^4.15.3",
+    "js-cookie": "^2.2.0",
+    "jsonwebtoken": "^8.4.0",
+    "mongodb": "^3.1.10",
+    "nuxt": "^2.3.4",
+    "shortid": "^2.2.14",
+    "vuetify": "^1.4.1"
+  },
+  "devDependencies": {
+    "cross-env": "^5.0.1",
+    "node-sass": "^4.11.0",
+    "nodemon": "^1.11.0",
+    "sass-loader": "^7.1.0",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.2"
+  }
+}
