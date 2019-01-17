@@ -41,7 +41,7 @@
             Cookies.set('accessToken', res.data.token)
             this.$axios.setToken(res.data.token)
             this.$store.commit('setAuth', true)
-            this.$router.push('/me')
+            this.$router.push(this.$route.query.redirect || '/me')
           })
         }
       }

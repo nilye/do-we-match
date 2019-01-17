@@ -51,47 +51,13 @@ router.post('/create', (req, res, next)=>{
   })
 })
 
-router.get('/pending', (req, res, next)=>{
-  const qn = db().collection('questionnaire')
-  let pipelines = [
-    {$match:{id:req.query.id}},
-    {$unwind:{
-      path:"$questions",
-        preserveNullAndEmptyArrays: true}},
-    {$lookup: {from: 'question', localField: 'questions.question', foreignField: '_id', as: 'questions'}},
-    {$unwind: '$questions.question'},
-    {$lookup: {from: 'user', localField: 'owner', foreignField: '_id', as: 'owner'}},
-    {$unwind:'$owner'},
-    {$group: {
-        _id:'$_id',
-        id: {$first:'$id'},
-        isParent: {$first: '$isParent'},
-        name: {$first: '$name'},
-        owner: {$first: '$owner'},
-        answers:{$first: '$answers'},
-        questions: {
-          $push: {question: '$questions.question', choice: '$questions.choice'}
-        }
-      }
-    }
-  ]
-  qn.aggregate(pipelines).toArray((err, result)=>{
-    let data = result[0], isOwner = false
-    const decoded = jwt.decode(req.get('Authorization'), secret)
-    if (decoded && decoded.userId === data.owner._id.toHexString()){
-      Object.assign(data, {isOwner})
-    }
-    res.status(200).json({data})
-  })
-})
-
 router.get('/questionnaire', (req, res, next)=>{
   const qn = db().collection('questionnaire')
   let pipelines = [
     {$match: {id:req.query.id}},
-    {$unwind: '$questions'},
+    {$unwind: {path:'$questions', preserveNullAndEmptyArrays: true}},
     {$lookup: {from: 'question', localField: 'questions.question', foreignField: '_id', as: 'questions.question'}},
-    {$unwind: '$questions.question'},
+    {$unwind: {path:'$questions.question', preserveNullAndEmptyArrays: true}},
     {$lookup: {from: 'user', localField: 'owner', foreignField: '_id', as: 'owner'}},
     {$unwind: '$owner'},
     {$group: {
@@ -119,6 +85,10 @@ router.get('/questionnaire', (req, res, next)=>{
   }
   qn.aggregate(pipelines).toArray((err, result)=>{
     let data = result[0], isOwner = false
+    if (!data) res.status(400).json({msg:'no data'})
+    if (!data.questions[0].question){
+      data.questions = []
+    }
     const decoded = jwt.decode(req.get('Authorization'), secret)
     if (decoded && decoded.userId === data.owner._id.toHexString()){
       isOwner = true

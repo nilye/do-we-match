@@ -23,7 +23,7 @@
     <v-navigation-drawer
       v-model="sideBar"
       right fixed temporary>
-      <v-list v-if="questionnaire.questions>0">
+      <v-list v-if="questionnaire.questions.length>0">
         <v-list-tile v-for="(q, index) in questionnaire.questions"
                      class="tile"
                      :key="q.question._id">
@@ -54,10 +54,12 @@
         <v-btn color="primary" depressed round
                @click="addQuestion()">添加</v-btn>
       </div>
-      <v-btn v-else-if="length >= max"
-             class="ml-0 mt-5" block
-             color="primary" round depressed
-             @click="publish()">发布</v-btn>
+      <div v-else-if="length >= max">
+        <p>{{max}}道题目已经选完！</p>
+        <v-btn class="ml-0 mt-5" block
+               color="primary" round depressed
+               @click="publish()">发布</v-btn>
+      </div>
       <p v-else-if="!question">没有更多此类题目了，区别的类别看看吧！</p>
     </div>
   </div>
@@ -72,8 +74,9 @@
 <script>
 	export default {
 		name: "create",
+    middleware:['auth'],
     asyncData({store, query, app}){
-		  return app.$axios.$get('/q/pending?id='+query.id).then(res=>{
+		  return app.$axios.$get('/q/questionnaire?id='+query.id).then(res=>{
 		    return {
 		      questionnaire: res.data,
         }
@@ -84,7 +87,8 @@
         'food': '食物',
         'brand': '品牌',
         'lifestyle': '生活',
-        'entertainment': '娱乐'
+        'entertainment': '娱乐',
+        'values':'三观'
       },
       activeCategory:'food',
       question:null,
@@ -95,6 +99,7 @@
     }),
     created(){
 		  this.acquire('food')
+      if (!this.questionnaire.isOwner) this.$router.push('/me')
     },
     computed:{
 		  length(){

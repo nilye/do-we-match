@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" serverName="nil.work" />
+  <component name="PublishConfigData" serverName="nil.work">
+    <serverData>
+      <paths name="nil.work">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/var/do-we-match" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+          <excludedPaths>
+            <excludedPath local="true" path="$PROJECT_DIR$/node_modules" />
+          </excludedPaths>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
 </project>

@@ -53,6 +53,7 @@
 <script>
 	export default {
 		name: "q-pg",
+    middleware:['auth'],
     asyncData({store, query, app}){
 		  return app.$axios.$get('/q/questionnaire?id='+query.id).then(res=>{
 		    return {
@@ -65,9 +66,6 @@
       active:0,
       sideBar:false
     }),
-    created(){
-
-    },
     computed:{
       length(){
         return this.questionnaire.questions.length || 0
@@ -92,7 +90,7 @@
           answers:this.answers,
           score:score
         }).then(res=>{
-           this.$router.push(`/share?t=s&q=${this.questionnaire.id}&a=${res.data.id}`)
+           this.$router.push(`/share?t=s&id=${this.questionnaire.id}&a=${res.data.id}`)
         })
       }
     }

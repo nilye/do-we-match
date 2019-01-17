@@ -26,12 +26,19 @@ router.get('/token', (req, res, next)=>{
 })
 
 router.get('/result', (req, res, next) => {
-  const col = db().collection('user')
-  col.findOne({_id: objectId(req.query.id)}).then(user=>{
-    console.log(user)
-    res.status(200).json({
-      data:user
-    })
+  const qn = db().collection('questionnaire')
+  const decoded = jwt.decode(req.get('Authorization'), secret)
+  qn.aggregate([
+    {$match: {owner: objectId(decoded.userId)}},
+    {$group: {
+      _id: '$owner',
+      questionnaire: {
+        $push: {_id: '$_id', id:'$id',name: '$name', answers: {$size: '$answers'}}
+      }}
+    }
+  ]).toArray((err, result)=>{
+    console.log(result[0])
+    res.status(200).json({data:result[0] ? result[0].questionnaire : null})
   })
 })
 
