@@ -42,6 +42,7 @@ router.post('/create', (req, res, next)=>{
     isParent: true,
     name: req.body.name,
     owner: objectId(decoded.userId),
+    answers:[],
     questions: []
   }).then(newQuestionnaire=>{
     res.status(200).json({
@@ -50,9 +51,43 @@ router.post('/create', (req, res, next)=>{
   })
 })
 
+router.get('/pending', (req, res, next)=>{
+  const qn = db().collection('questionnaire')
+  let pipelines = [
+    {$match:{id:req.query.id}},
+    {$unwind:{
+      path:"$questions",
+        preserveNullAndEmptyArrays: true}},
+    {$lookup: {from: 'question', localField: 'questions.question', foreignField: '_id', as: 'questions'}},
+    {$unwind: '$questions.question'},
+    {$lookup: {from: 'user', localField: 'owner', foreignField: '_id', as: 'owner'}},
+    {$unwind:'$owner'},
+    {$group: {
+        _id:'$_id',
+        id: {$first:'$id'},
+        isParent: {$first: '$isParent'},
+        name: {$first: '$name'},
+        owner: {$first: '$owner'},
+        answers:{$first: '$answers'},
+        questions: {
+          $push: {question: '$questions.question', choice: '$questions.choice'}
+        }
+      }
+    }
+  ]
+  qn.aggregate(pipelines).toArray((err, result)=>{
+    let data = result[0], isOwner = false
+    const decoded = jwt.decode(req.get('Authorization'), secret)
+    if (decoded && decoded.userId === data.owner._id.toHexString()){
+      Object.assign(data, {isOwner})
+    }
+    res.status(200).json({data})
+  })
+})
+
 router.get('/questionnaire', (req, res, next)=>{
   const qn = db().collection('questionnaire')
-  qn.aggregate([
+  let pipelines = [
     {$match: {id:req.query.id}},
     {$unwind: '$questions'},
     {$lookup: {from: 'question', localField: 'questions.question', foreignField: '_id', as: 'questions.question'}},
@@ -65,18 +100,30 @@ router.get('/questionnaire', (req, res, next)=>{
         isParent: {$first: '$isParent'},
         name: {$first: '$name'},
         owner: {$first: '$owner'},
-        answerer: {$first: '$answer'},
+        answers:{$first: '$answers'},
         questions: {
           $push: {question: '$questions.question', choice: '$questions.choice'}
         }
       }
     }
-  ]).toArray((err, result)=>{
-    let data = result[0]
+  ]
+  if (req.query.a){
+    pipelines = pipelines.concat([
+      {$unwind:'$answers'},
+      {$match:{'answers.id':req.query.a}},
+      {$lookup:{from: 'user', localField: 'answers.userId', foreignField: '_id', as: 'answers.user'}},
+      {$unwind:"$answers.user"}
+    ])
+  } else {
+    pipelines.push({$project: {answers: 0}})
+  }
+  qn.aggregate(pipelines).toArray((err, result)=>{
+    let data = result[0], isOwner = false
     const decoded = jwt.decode(req.get('Authorization'), secret)
     if (decoded && decoded.userId === data.owner._id.toHexString()){
-      Object.assign({isOwner: true},data)
+      isOwner = true
     }
+    Object.assign(data, {isOwner})
     res.status(200).json({data})
   })
 })

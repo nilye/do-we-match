@@ -23,7 +23,7 @@
     <v-navigation-drawer
       v-model="sideBar"
       right fixed temporary>
-      <v-list>
+      <v-list v-if="questionnaire.questions>0">
         <v-list-tile v-for="(q, index) in questionnaire.questions"
                      class="tile"
                      :key="q.question._id">
@@ -73,7 +73,7 @@
 	export default {
 		name: "create",
     asyncData({store, query, app}){
-		  return app.$axios.$get('/q/questionnaire?id='+query.id).then(res=>{
+		  return app.$axios.$get('/q/pending?id='+query.id).then(res=>{
 		    return {
 		      questionnaire: res.data,
         }
@@ -140,7 +140,7 @@
 		      id:this.questionnaire.id,
           isPublished:true
         }).then(res=>{})
-		    this.$router.push('/q?p='+this.questionnaire.id)
+		    this.$router.push('/share?t=q&id='+this.questionnaire.id)
       }
     }
 	}

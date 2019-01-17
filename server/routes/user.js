@@ -19,6 +19,11 @@ router.post('/signup', (req, res, next) => {
   })
 })
 
+router.get('/token', (req, res, next)=>{
+  res.status(200).json({
+    data:jwt.sign({userId:req.query.id}, secret)
+  })
+})
 
 router.get('/result', (req, res, next) => {
   const col = db().collection('user')

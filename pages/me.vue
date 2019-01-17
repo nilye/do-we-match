@@ -40,7 +40,7 @@
     methods:{
       newQuestionnaire(){
         if (!!this.newName.trim()){
-          this.$axios.$post('/question/create', {
+          this.$axios.$post('/q/create', {
             name: this.newName
           }).then(res=>{
             this.$router.push('/create?id='+res.data.id)

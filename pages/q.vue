@@ -54,7 +54,7 @@
 	export default {
 		name: "q-pg",
     asyncData({store, query, app}){
-		  return app.$axios.$get('/q/questionnaire?id='+query.p).then(res=>{
+		  return app.$axios.$get('/q/questionnaire?id='+query.id).then(res=>{
 		    return {
 		      questionnaire:res.data,
           answers:res.data.questions.map(()=>null)
@@ -92,14 +92,8 @@
           answers:this.answers,
           score:score
         }).then(res=>{
-          // this.$router.push()
+           this.$router.push(`/share?t=s&q=${this.questionnaire.id}&a=${res.data.id}`)
         })
-        // level = (()=>{
-        //   if (score<3) return 0
-        //   else if (score < 6) return 1
-        //   else return 2
-        // })()
-        // console.log(level, score)
       }
     }
 	}
