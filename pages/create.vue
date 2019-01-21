@@ -50,7 +50,7 @@
           </v-radio-group>
         </v-form>
         <v-btn class="ml-0" depressed round
-               @click="acquire(activeCategory)">换一换</v-btn>
+               @click="acquire(activeCategory, true)">换一换</v-btn>
         <v-btn color="primary" depressed round
                @click="addQuestion()">添加</v-btn>
       </div>
@@ -62,6 +62,7 @@
       </div>
       <p v-else-if="!question">没有更多此类题目了，区别的类别看看吧！</p>
     </div>
+    <v-footer fixed class="px-2" color="transparent">*请在以上类别中选择并回答后添加此问题</v-footer>
   </div>
 </template>
 
@@ -107,8 +108,12 @@
       }
     },
     methods:{
-		  acquire(category){
+		  acquire(category, random){
 		    this.activeCategory = category
+        if (random){
+		      let c = ['food','brand','lifestyle','entertainment','values']
+          this.activeCategory = c[Math.floor(Math.random()*5)]
+        }
 		    this.$axios.$get(`/q/acquire?qn=${this.questionnaire.id}&c=${category}&l=${this.lastId}`).then(res=>{
 		      this.lastId = res.data ? res.data._id : ''
 		      this.question = res.data
@@ -126,7 +131,7 @@
             choice:this.choice,
             question: this.question
           })
-          this.acquire(this.activeCategory)
+          this.acquire(this.activeCategory, true)
           this.updateChanges()
         }
       },

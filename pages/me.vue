@@ -1,21 +1,10 @@
 <template>
 	<div class="text-xs-center">
-    <v-dialog fullscreen hide-overlay v-model="dialog"
-              class="my-3">
-      <v-btn color="primary" round depressed
-             slot="activator"
-             transition="dialog-bottom-transition"
-             @click="newQuestionnaire">我要出卷子</v-btn>
-      <v-card>
-        <div class="pa-4 text-xs-right">
-          <v-text-field v-model="newName" box required
-                        :rules="[v=>!!v||'必填']"
-                        label="添加卷子名称备注"></v-text-field>
-          <v-btn round depressed @click="dialog=false">取消</v-btn>
-          <v-btn round color="primary" depressed @click="newQuestionnaire">确定</v-btn>
-        </div>
-      </v-card>
-    </v-dialog>
+    <v-btn color="primary" round depressed
+           slot="activator"
+           class="my-3"
+           transition="dialog-bottom-transition"
+           @click="newQuestionnaire">我要出卷子</v-btn>
     <v-list>
       <p class="text-xs-center" v-if="!results">空</p>
       <v-list-tile v-for="i in results" :key="i._id" :to="'/share?t=q&id='+i.id">
@@ -43,16 +32,9 @@
     }),
     methods:{
       newQuestionnaire(){
-        if (!!this.newName.trim()){
-          this.$axios.$post('/q/create', {
-            name: this.newName
-          }).then(res=>{
-            this.$router.push('/create?id='+res.data.id)
-          })
-        }
-      },
-      rowClick(row){
-        console.log(row.id)
+        this.$axios.$get('/q/create').then(res=>{
+          this.$router.push('/create?id='+res.data.id)
+        })
       }
     }
 	}

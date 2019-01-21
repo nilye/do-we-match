@@ -74,7 +74,8 @@
           ["平平淡淡才是真","若即若离也还行","君子之交淡如水"],
           ["简直是天作之合啊","一定要牵手","绝对是老铁啊"]
         ]
-        this.score.msg = msg[this.score.level][Math.round(Math.random()*3)]
+        const index = this.score.level
+        this.score.msg = msg[index][Math.floor(Math.random()*index)]
         this.score.calculated = true
       }
     }

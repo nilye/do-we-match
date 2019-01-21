@@ -31,16 +31,17 @@ router.get('/acquire', (req, res, next) => {
   })
 })
 
-router.post('/create', (req, res, next)=>{
+router.get('/create', (req, res, next)=>{
   const qn = db().collection('questionnaire')
   const decoded = jwt.decode(req.get('Authorization'), secret)
   if (!decoded){
     res.status(403).json({msg:'unauthorized'})
   }
+  const id = shortid.generate()
   qn.insertOne({
-    id: shortid.generate(),
+    id: id,
     isParent: true,
-    name: req.body.name,
+    name: id,
     owner: objectId(decoded.userId),
     answers:[],
     questions: []
