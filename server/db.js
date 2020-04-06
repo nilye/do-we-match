@@ -1,8 +1,7 @@
 const mongodb = require('mongodb')
 
 
-const url = 'mongodb://104.248.152.52:27017';
-// const url = 'mognodb://localhost:27017';
+const url = 'mognodb://localhost:27017';
 const MongoClient = new mongodb.MongoClient(url, {
   poolSize:10,
   useNewUrlParser: true
