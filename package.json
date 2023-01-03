@@ -16,7 +16,7 @@
     "js-cookie": "^2.2.0",
     "jsonwebtoken": "^8.4.0",
     "mongodb": "^3.1.10",
-    "nuxt": "^2.3.4",
+    "nuxt": "^2.15.8",
     "shortid": "^2.2.14",
     "vuetify": "^1.4.1"
   },
